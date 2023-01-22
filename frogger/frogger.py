@@ -27,6 +27,9 @@ while True:
 	# delta time
 	dt = clock.tick() / 1000
 
+	# update
+	all_sprites.update()
+
 	# draw
 	all_sprites.draw(display_surface)
 
