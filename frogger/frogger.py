@@ -1,10 +1,13 @@
 import sys
+import os
 from random import choice, randint
 import pygame
 from settings import *
 from player import Player
 from car import Car
 from all_sprites import AllSprites
+from sprite import SimpleSprite
+
 
 # basic setup
 pygame.init()
@@ -22,6 +25,13 @@ player = Player((500, 400), all_sprites)
 car_timer = pygame.event.custom_type()
 pygame.time.set_timer(car_timer, 50)
 pos_list = []
+
+# sprite setup
+for file_name, pos_list in SIMPLE_OBJECTS.items():
+	file_path = os.path.join('graphics', 'objects', 'simple', f'{file_name}.png')
+	surf = pygame.image.load(file_path)
+	for pos in pos_list:
+		SimpleSprite(surf, pos, all_sprites)
 
 # game loop
 while True:
