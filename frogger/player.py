@@ -8,7 +8,8 @@ class Player(pygame.sprite.Sprite):
 		# image
 		self.import_assets()
 		self.frame_index = 0
-		self.image = self.animation[self.frame_index]
+		self.status = 'up'
+		self.image = self.animations[self.status][self.frame_index]
 		self.rect = self.image.get_rect(center=pos)
 
 		# float based movement
@@ -17,9 +18,18 @@ class Player(pygame.sprite.Sprite):
 		self.speed = 200
 
 	def import_assets(self):
-		path = os.path.join('data', 'graphics', 'player', 'right')
-		self.animation = [pygame.image.load(os.path.join(path, f'{frame}.png')).convert_alpha() for frame in range(4)]
-		print(self.animation)
+		path = os.path.join('data', 'graphics', 'player')
+		self.animations = {}
+
+		for index, folder in enumerate(os.walk(path)):
+			if index == 0:
+				for name in folder[1]:
+					self.animations[name] = []
+			else:
+				for file in folder[2]:
+					file = os.path.join(folder[0], file)
+					surf = pygame.image.load(file).convert_alpha()
+					self.animations[os.path.basename(os.path.dirname(file))].append(surf)
 
 	def move(self, dt):
 		if self.direction.magnitude():
@@ -48,8 +58,9 @@ class Player(pygame.sprite.Sprite):
 			self.direction.y = 0
 
 	def animate(self, dt):
+		current_animations = self.animations[self.status]
 		self.frame_index += (8 * dt)
-		self.image = self.animation[int(self.frame_index)%len(self.animation)]
+		self.image = current_animations[int(self.frame_index)%len(current_animations)]
 
 	def update(self, dt):
 		self.input()
