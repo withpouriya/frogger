@@ -37,7 +37,9 @@ while True:
 	all_sprites.update(dt)
 
 	# draw
-	all_sprites.customize_draw(display_surface)
+	all_sprites.customize_draw(display_surface, ((player.rect.centerx - WINDOW_WIDTH / 2, player.rect.centery - WINDOW_HEIGHT / 2)))
+	print(player.rect.centerx)
+	print(player.rect.centerx - WINDOW_WIDTH / 2)
 
 	# update the display surface
 	pygame.display.update()
