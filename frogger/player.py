@@ -7,6 +7,15 @@ class Player(pygame.sprite.Sprite):
 		self.image.fill('red')
 		self.rect = self.image.get_rect(center=pos)
 
+		# float based movement
+		self.pos = pygame.math.Vector2(self.rect.center)
+		self.direction = pygame.math.Vector2((0, 1))
+		self.speed = 200
+
+	def move(self, dt):
+		self.pos += self.direction * self.speed * dt
+		self.rect.center = (round(self.pos.x), round(self.pos.y))
+
 	def input(self):
 		keys = pygame.key.get_pressed()
 		if keys[pygame.K_RIGHT]:
@@ -19,5 +28,6 @@ class Player(pygame.sprite.Sprite):
 			print('down')
 
 
-	def update(self):
+	def update(self, dt):
 		self.input()
+		self.move(dt)

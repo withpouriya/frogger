@@ -27,8 +27,11 @@ while True:
 	# delta time
 	dt = clock.tick() / 1000
 
+	# draw a bg
+	display_surface.fill('black')
+
 	# update
-	all_sprites.update()
+	all_sprites.update(dt)
 
 	# draw
 	all_sprites.draw(display_surface)
