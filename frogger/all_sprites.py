@@ -15,7 +15,7 @@ class AllSprites(pygame.sprite.Group):
 
 		surf.blit(self.bg, (-self.offset.x, -self.offset.y))
 
-		for sprite in self.sprites():
+		for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
 			offset_pos = sprite.rect.topleft - self.offset
 			surf.blit(sprite.image, offset_pos)
 
