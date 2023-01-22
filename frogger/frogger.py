@@ -3,6 +3,7 @@ import pygame
 from settings import *
 from player import Player
 from car import Car
+from all_sprites import AllSprites
 
 # basic setup
 pygame.init()
@@ -11,7 +12,7 @@ pygame.display.set_caption('Frogger')
 clock = pygame.time.Clock()
 
 # groups
-all_sprites = pygame.sprite.Group()
+all_sprites = AllSprites()
 
 # sprites
 player = Player((500, 400), all_sprites)
@@ -36,7 +37,7 @@ while True:
 	all_sprites.update(dt)
 
 	# draw
-	all_sprites.draw(display_surface)
+	all_sprites.customize_draw(display_surface)
 
 	# update the display surface
 	pygame.display.update()
