@@ -8,7 +8,7 @@ class Player(pygame.sprite.Sprite):
 		# image
 		self.import_assets()
 		self.frame_index = 0
-		self.status = 'up'
+		self.status = 'right'
 		self.image = self.animations[self.status][self.frame_index]
 		self.rect = self.image.get_rect(center=pos)
 
@@ -44,16 +44,20 @@ class Player(pygame.sprite.Sprite):
 		# horizontal input
 		if keys[pygame.K_RIGHT]:
 			self.direction.x = 1
+			self.status = 'right'
 		elif keys[pygame.K_LEFT]:
 			self.direction.x = -1
+			self.status = 'left'
 		else:
 			self.direction.x = 0
 
 		# vertical input
 		if keys[pygame.K_UP]:
 			self.direction.y = -1
+			self.status = 'up'
 		elif keys[pygame.K_DOWN]:
 			self.direction.y = 1
+			self.status = 'down'
 		else:
 			self.direction.y = 0
 
