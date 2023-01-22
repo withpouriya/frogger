@@ -9,7 +9,7 @@ class Player(pygame.sprite.Sprite):
 
 		# float based movement
 		self.pos = pygame.math.Vector2(self.rect.center)
-		self.direction = pygame.math.Vector2((0, 1))
+		self.direction = pygame.math.Vector2((0, 0))
 		self.speed = 200
 
 	def move(self, dt):
@@ -17,16 +17,24 @@ class Player(pygame.sprite.Sprite):
 		self.rect.center = (round(self.pos.x), round(self.pos.y))
 
 	def input(self):
-		keys = pygame.key.get_pressed()
-		if keys[pygame.K_RIGHT]:
-			print('right')
-		if keys[pygame.K_LEFT]:
-			print('left')
-		if keys[pygame.K_UP]:
-			print('up')
-		if keys[pygame.K_DOWN]:
-			print('down')
 
+		keys = pygame.key.get_pressed()
+
+		# horizontal input
+		if keys[pygame.K_RIGHT]:
+			self.direction.x = 1
+		elif keys[pygame.K_LEFT]:
+			self.direction.x = -1
+		else:
+			self.direction.x = 0
+
+		# vertical input
+		if keys[pygame.K_UP]:
+			self.direction.y = -1
+		elif keys[pygame.K_DOWN]:
+			self.direction.y = 1
+		else:
+			self.direction.y = 0
 
 	def update(self, dt):
 		self.input()
