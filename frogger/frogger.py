@@ -6,7 +6,7 @@ from settings import *
 from player import Player
 from car import Car
 from all_sprites import AllSprites
-from sprite import SimpleSprite
+from sprite import SimpleSprite, LongSprite
 
 
 # basic setup
@@ -29,9 +29,15 @@ pos_list = []
 # sprite setup
 for file_name, pos_list in SIMPLE_OBJECTS.items():
 	file_path = os.path.join('graphics', 'objects', 'simple', f'{file_name}.png')
-	surf = pygame.image.load(file_path)
+	surf = pygame.image.load(file_path).convert_alpha()
 	for pos in pos_list:
 		SimpleSprite(surf, pos, all_sprites)
+
+for file_name, pos_list in LONG_OBJECTS.items():
+	file_path = os.path.join('graphics', 'objects', 'long', f'{file_name}.png')
+	surf = pygame.image.load(file_path).convert_alpha()
+	for pos in pos_list:
+		LongSprite(surf, pos, all_sprites)
 
 # game loop
 while True:
