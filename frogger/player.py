@@ -18,7 +18,7 @@ class Player(pygame.sprite.Sprite):
 		self.speed = 200
 
 	def import_assets(self):
-		path = os.path.join('data', 'graphics', 'player')
+		path = os.path.join('graphics', 'player')
 		self.animations = {}
 
 		for index, folder in enumerate(os.walk(path)):
