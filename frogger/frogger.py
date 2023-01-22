@@ -15,7 +15,7 @@ all_sprites = pygame.sprite.Group()
 
 # sprites
 player = Player((500, 400), all_sprites)
-car = Car((100, 100), all_sprites)
+car = Car((700, 100), all_sprites)
 
 # game loop
 while True:
