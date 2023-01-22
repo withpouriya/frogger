@@ -13,11 +13,13 @@ class Player(pygame.sprite.Sprite):
 		self.speed = 200
 
 	def move(self, dt):
+		if self.direction.magnitude():
+			self.direction = self.direction.normalize()
+
 		self.pos += self.direction * self.speed * dt
 		self.rect.center = (round(self.pos.x), round(self.pos.y))
 
 	def input(self):
-
 		keys = pygame.key.get_pressed()
 
 		# horizontal input
