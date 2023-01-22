@@ -63,8 +63,12 @@ class Player(pygame.sprite.Sprite):
 
 	def animate(self, dt):
 		current_animations = self.animations[self.status]
-		self.frame_index += (8 * dt)
-		self.image = current_animations[int(self.frame_index)%len(current_animations)]
+
+		if self.direction.magnitude():
+			self.frame_index += (8 * dt)
+			self.image = current_animations[int(self.frame_index)%len(current_animations)]
+		else:
+			self.frame_index = 0
 
 	def update(self, dt):
 		self.input()
