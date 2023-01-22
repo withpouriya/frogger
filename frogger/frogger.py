@@ -1,5 +1,5 @@
 import pygame, sys
-from settings import *
+from frogger.settings import *
 
 # basic setup
 pygame.init()
