@@ -5,6 +5,8 @@ import pygame
 class Car(pygame.sprite.Sprite):
 	def __init__(self, pos, groups):
 		super().__init__(groups)
+		self.name = 'car'
+
 		for _, _, files in os.walk(os.path.join('graphics', 'cars')):
 			car_name = choice(files)
 
