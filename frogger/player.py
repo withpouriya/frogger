@@ -20,32 +20,37 @@ class Player(pygame.sprite.Sprite):
 
 		# collisions
 		self.collision_sprites = collision_sprites
+		self.hitbox = self.rect.inflate(0, -self.rect.height/2)
 
 	def collision(self, direction):
 		if direction == 'horizontal':
 			for sprite in self.collision_sprites.sprites():
-				if sprite.rect.colliderect(self.rect):
+				if sprite.hitbox.colliderect(self.hitbox):
 					if hasattr(sprite, 'name') and sprite.name == 'car':
 						pygame.quit()
 						sys.exit()
 					if self.direction.x > 0:
-						self.rect.right = sprite.rect.left
-						self.pos.x = self.rect.centerx
+						self.hitbox.right = sprite.rect.left
+						self.rect.centerx = self.hitbox.centerx
+						self.pos.x = self.hitbox.centerx
 					elif self.direction.x < 0:
-						self.rect.left = sprite.rect.right
-						self.pos.x = self.rect.centerx
+						self.hitbox.left = sprite.rect.right
+						self.rect.centerx = self.hitbox.centerx
+						self.pos.x = self.hitbox.centerx
 		else:
 			for sprite in self.collision_sprites.sprites():
-				if sprite.rect.colliderect(self.rect):
+				if sprite.hitbox.colliderect(self.hitbox):
 					if hasattr(sprite, 'name') and sprite.name == 'car':
 						pygame.quit()
 						sys.exit()
 					if self.direction.y > 0:
-						self.rect.bottom = sprite.rect.top
-						self.pos.y = self.rect.centery
+						self.hitbox.bottom = sprite.rect.top
+						self.rect.centery = self.hitbox.centery
+						self.pos.y = self.hitbox.centery
 					elif self.direction.y < 0:
-						self.rect.top = sprite.rect.bottom
-						self.pos.y = self.rect.centery
+						self.hitbox.top = sprite.rect.bottom
+						self.rect.centery = self.hitbox.centery
+						self.pos.y = self.hitbox.centery
 
 	def import_assets(self):
 		path = os.path.join('graphics', 'player')
@@ -67,12 +72,14 @@ class Player(pygame.sprite.Sprite):
 
 		# horizontal movement + collision
 		self.pos.x += self.direction.x * self.speed * dt
-		self.rect.centerx = round(self.pos.x)
+		self.hitbox.centerx = round(self.pos.x)
+		self.rect.centerx = self.hitbox.centerx
 		self.collision('horizontal')
 
 		# vertical movement + collision
 		self.pos.y += self.direction.y * self.speed * dt
-		self.rect.centery = round(self.pos.y)
+		self.hitbox.centery = round(self.pos.y)
+		self.rect.centery = self.hitbox.centery
 		self.collision('vertical')
 
 	def input(self):
