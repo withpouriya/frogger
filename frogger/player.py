@@ -1,3 +1,4 @@
+import sys
 import os
 import pygame
 
@@ -25,7 +26,8 @@ class Player(pygame.sprite.Sprite):
 			for sprite in self.collision_sprites.sprites():
 				if sprite.rect.colliderect(self.rect):
 					if hasattr(sprite, 'name') and sprite.name == 'car':
-						print('car collision')
+						pygame.quit()
+						sys.exit()
 					if self.direction.x > 0:
 						self.rect.right = sprite.rect.left
 						self.pos.x = self.rect.centerx
@@ -36,7 +38,8 @@ class Player(pygame.sprite.Sprite):
 			for sprite in self.collision_sprites.sprites():
 				if sprite.rect.colliderect(self.rect):
 					if hasattr(sprite, 'name') and sprite.name == 'car':
-						print('car collision')
+						pygame.quit()
+						sys.exit()
 					if self.direction.y > 0:
 						self.rect.bottom = sprite.rect.top
 						self.pos.y = self.rect.centery
